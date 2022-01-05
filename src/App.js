@@ -1,5 +1,9 @@
 import './App.css'
-import {useState, createContext, useContext} from "react";
+import {useState} from "react";
+import {weightIncrement, weightDecrement} from "./features/profile/profileSlice";
+
+import {cssStyle} from "./cssStyle_tailwindVar";
+
 
 //component
 import BlankBlock from "./components/todoapp/ETC/blank";
@@ -7,18 +11,13 @@ import Pushbar from "./components/todoapp/Pushbar/Pushbar";
 import Navibar from "./components/todoapp/Navibar/Navibar";
 import Content from "./components/todoapp/Content/Content";
 import Footer from "./components/todoapp/Footer/Footer";
+import {useDispatch, useSelector} from "react-redux";
 
-// context sample
-export const storeContext = createContext()
-const username = 'J-dragon🐲'
-const allStyle = 'border border-black border-2 rounded-full px-1.5'
 
 export default function App() {
-    const trStyle = "border-b"
-    const btnStyle = 'border border-black border-2 rounded-full px-1.5'
-    const tableStyle = {
-        width: '800px',
-    }
+    const trStyle = cssStyle.trStyle
+    const btnStyle = cssStyle.btnStyle
+    const tableStyle = cssStyle.tableStyle
 
     // [선택지]를 두고 싶을 때
     const TODO = 'TODO'
@@ -82,32 +81,55 @@ export default function App() {
         }
     },])
 
+    //Redux var
+    const myWeight = useSelector(state => state.profile.weight)
+    const myHeight = useSelector(state => state.profile.height)
+    const dispatch = useDispatch()
+
     return (
-        <storeContext.Provider value={username}>
-            <div className={'App'}>
+        <div className={'App'}>
 
-                <Navibar setlike={setlike} like={like}/>
+            <Navibar setlike={setlike} like={like}/>
 
-                <BlankBlock/>
+            <BlankBlock/>
 
-                <div className={'text-2xl text-Center'}>To Do</div>
-                <Content tableStyle={tableStyle} trStyle={trStyle} btnStyle={btnStyle} todoList={todoList}
-                         setTodolist={setTodolist} setDoinglist={setDoinglist} doingList={doingList}/>
-
-                <BlankBlock/>
-
-                <div className={'text-2xl text-Center'}>Doing</div>
-                <Content tableStyle={tableStyle} trStyle={trStyle} btnStyle={btnStyle} todoList={doingList}
-                         setTodolist={setTodolist} setDoinglist={setDoinglist} doingList={doingList}/>
-
-                <BlankBlock/>
-
-                <Pushbar todoList={todoList} setTodolist={setTodolist} btnStyle={btnStyle}/>
-
-                <BlankBlock/>
-
-                <Footer/>
+            <div>
+                <p>나의 몸무게는 {myWeight}Kg 입니다.</p>
+                <button className={btnStyle}
+                        onClick={() => {
+                            dispatch(weightIncrement())
+                        }}>
+                    살쪘다
+                </button>
+                <button className={btnStyle}
+                        onClick={() => {
+                            dispatch(weightDecrement())
+                        }}>
+                    살빠졌다
+                </button>
+                <p>참고로..나의 키는 아침엔{myHeight.moring}cm 입니다.</p>
+                <p>그렇다면 저녁에는 {myHeight.evening}cm 입니다.</p>
             </div>
-        </storeContext.Provider>
+
+            <BlankBlock/>
+
+            <div className={'text-2xl text-Center'}>To Do</div>
+            <Content trStyle={trStyle} btnStyle={btnStyle} todoList={todoList}
+                     setTodolist={setTodolist} setDoinglist={setDoinglist} doingList={doingList}/>
+
+            <BlankBlock/>
+
+            <div className={'text-2xl text-Center'}>Doing</div>
+            <Content trStyle={trStyle} btnStyle={btnStyle} todoList={doingList}
+                     setTodolist={setTodolist} setDoinglist={setDoinglist} doingList={doingList}/>
+
+            <BlankBlock/>
+
+            <Pushbar todoList={todoList} setTodolist={setTodolist} btnStyle={btnStyle}/>
+
+            <BlankBlock/>
+
+            <Footer/>
+        </div>
     )
 }

@@ -1,14 +1,16 @@
 import Printrow from "./Printrow";
+import {cssStyle} from "../../../cssStyle_tailwindVar";
 
-export default function Tbody({trStyle, btnStyle, todoList, setTodolist, setDoinglist, doingList}) {
+export default function Tbody({todoList, setTodolist, setDoinglist, doingList}) {
+    const trStyle = cssStyle.trStyle
+    const btnStyle = cssStyle.btnStyle
 
     return (
         <tbody>
-
         {
             todoList.map((obj, index) => {
                 return (
-                    <Printrow trStyle={trStyle} btnStyle={btnStyle} obj={obj} index={index} todoList={todoList} setTodolist={setTodolist} doingList={doingList} setDoinglist={setDoinglist}/>
+                    <Printrow obj={obj} index={index} todoList={todoList} setTodolist={setTodolist} doingList={doingList} setDoinglist={setDoinglist}/>
                 )
             })
         }

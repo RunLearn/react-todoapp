@@ -1,4 +1,9 @@
-export default function Thead({ trStyle, btnStyle, todoList, setTodolist}){
+import {cssStyle} from "../../../cssStyle_tailwindVar";
+
+export default function Thead({ todoList, setTodolist}){
+    const trStyle = cssStyle.trStyle
+    const btnStyle = cssStyle.btnStyle
+
     return (
         <thead>
         <tr className={trStyle}>

@@ -1,8 +1,7 @@
-import {useContext} from "react";
-import {storeContext} from "../../../App";
+import {useSelector} from "react-redux";
 
 export default function Footer(){
-    const username = useContext(storeContext)
+    const username = useSelector(state => state.profile.username)
 
     return (
         <div>

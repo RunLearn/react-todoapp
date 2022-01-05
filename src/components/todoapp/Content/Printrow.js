@@ -1,5 +1,8 @@
-export default function Printrow({trStyle, btnStyle, obj, index, todoList, setTodolist, setDoinglist, doingList}) {
+import {cssStyle} from "../../../cssStyle_tailwindVar";
 
+export default function Printrow({obj, index, todoList, setTodolist, setDoinglist, doingList}) {
+    const trStyle = cssStyle.trStyle
+    const btnStyle = cssStyle.btnStyle
     const {name, task, deadline, createdAt, state} = obj
     const today = new Date().toISOString().split('T')[0]
 
