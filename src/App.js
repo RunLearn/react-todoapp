@@ -12,11 +12,12 @@ import Navibar from "./components/todoapp/Navibar/Navibar";
 import Content from "./components/todoapp/Content/Content";
 import Footer from "./components/todoapp/Footer/Footer";
 import {useDispatch, useSelector} from "react-redux";
+import PrintTable from "./components/todoapp/PrintTable/PrintTable";
 
 
 export default function App() {
     const trStyle = cssStyle.trStyle
-    const btnStyle = cssStyle.btnStyle
+    const btnStyle1 = cssStyle.btnStyle
     const tableStyle = cssStyle.tableStyle
 
     // [선택지]를 두고 싶을 때
@@ -84,6 +85,7 @@ export default function App() {
     //Redux var
     const myWeight = useSelector(state => state.profile.weight)
     const myHeight = useSelector(state => state.profile.height)
+    const todoList_new = useSelector(state => state.todoList.todolist)
     const dispatch = useDispatch()
 
     return (
@@ -93,15 +95,19 @@ export default function App() {
 
             <BlankBlock/>
 
+            <PrintTable list={todoList_new} tablestatus = "TODO"/>
+
+            <BlankBlock/>
+
             <div>
                 <p>나의 몸무게는 {myWeight}Kg 입니다.</p>
-                <button className={btnStyle}
+                <button className={btnStyle1}
                         onClick={() => {
                             dispatch(weightIncrement())
                         }}>
                     살쪘다
                 </button>
-                <button className={btnStyle}
+                <button className={btnStyle1}
                         onClick={() => {
                             dispatch(weightDecrement())
                         }}>
@@ -114,18 +120,18 @@ export default function App() {
             <BlankBlock/>
 
             <div className={'text-2xl text-Center'}>To Do</div>
-            <Content trStyle={trStyle} btnStyle={btnStyle} todoList={todoList}
+            <Content trStyle={trStyle} btnStyle={btnStyle1} todoList={todoList}
                      setTodolist={setTodolist} setDoinglist={setDoinglist} doingList={doingList}/>
 
             <BlankBlock/>
 
             <div className={'text-2xl text-Center'}>Doing</div>
-            <Content trStyle={trStyle} btnStyle={btnStyle} todoList={doingList}
+            <Content trStyle={trStyle} btnStyle={btnStyle1} todoList={doingList}
                      setTodolist={setTodolist} setDoinglist={setDoinglist} doingList={doingList}/>
 
             <BlankBlock/>
 
-            <Pushbar todoList={todoList} setTodolist={setTodolist} btnStyle={btnStyle}/>
+            <Pushbar todoList={todoList} setTodolist={setTodolist} btnStyle={btnStyle1}/>
 
             <BlankBlock/>
 

@@ -8,7 +8,7 @@ export const likeSlice = createSlice({
     reducers: {
         likeIncrease : state => {
             state.value ++
-        }
+        },
     }
 })
 
