@@ -19,7 +19,6 @@ export default function Header() {
                     <Navibutton btn_text={`Like💜 ⤳ 💜 X ${like}`}/>
                 </button>
 
-
             </nav>
         </header>
     )

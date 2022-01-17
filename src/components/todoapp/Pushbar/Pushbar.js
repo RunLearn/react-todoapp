@@ -1,11 +1,10 @@
 import Inputbox from "./Inputbox";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {cssStyle} from "../../../cssStyle_tailwindVar";
 import {addToDoAt} from "../../../features/doList/todoListSlice";
 
 export default function Pushbar(){
     const btnStyle = cssStyle.btnStyle
-    const todoList = useSelector(state => state.todoList.todolist)
     const dispatch = useDispatch()
 
     return(
@@ -28,6 +27,7 @@ export default function Pushbar(){
                         }
                         dispatch(addToDoAt(pushThing))
 
+                        //입력 후 input form reset
                         document.querySelector('#name').value = null
                         document.querySelector('#task').value = null
                         document.querySelector('#deadline').value = null

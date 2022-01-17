@@ -111,6 +111,7 @@ export default function Tbody({list, tableStatus}){
                         <td>
                             <button className={btnStyle}
                                     onClick={(event) => {
+                                        // Switch 문으로 변경 가능
                                         if (tableStatus === "TODO") {
                                             dispatch(removeToDoAt(index))
                                             dispatch(addDoingAt(obj))
